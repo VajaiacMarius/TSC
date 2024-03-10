@@ -17,19 +17,28 @@ import instr_register_pkg::*;  // user-defined types are defined in instr_regist
  input  address_t      write_pointer,
  input  address_t      read_pointer,
  output instruction_t  instruction_word
-);
+); // input nu se modifica
   timeunit 1ns/1ns;
 
   instruction_t  iw_reg [0:31];  // an array of instruction_word structures
 
   // write to the register
-  always@(posedge clk, negedge reset_n)   // write into register
+  always@(posedge clk, negedge reset_n)   // write into register 
     if (!reset_n) begin
       foreach (iw_reg[i])
-        iw_reg[i] = '{opc:ZERO,default:0};  // reset to all zeros
+        iw_reg[i] = '{opc:ZERO,default:0};  // reset to all zeros 
     end
-    else if (load_en) begin
-      iw_reg[write_pointer] = '{opcode,operand_a,operand_b};
+    else if (load_en) begin 
+      case (opcode)
+        ZERO: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, 'b0}; //rezultatul este setat la 0
+        PASSA: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a}; //rezultatul este operandul A
+        PASSB: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_b};//rezultatul este operandul B
+        ADD: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a + operand_b};
+        SUB: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a - operand_b};
+        MULT: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a * operand_b};
+        DIV: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a / operand_b};
+        MOD: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a % operand_b};  
+      endcase 
     end
 
   // read from the register
