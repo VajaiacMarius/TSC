@@ -21,8 +21,9 @@ module instr_register_test
   );
 
   timeunit 1ns/1ns;
-  parameter  RD_NR = 20;
-  parameter  WR_NR = 20;
+  //11.02.2024 am adaugat parametrii ptr for si repeat
+  parameter  = RD_NR = 20 ;
+  parameter = WR_NR = 20;
   int seed = 555;
 
   initial begin
@@ -58,7 +59,6 @@ module instr_register_test
       // the expected values to be read back
       @(posedge clk) read_pointer = i;
       @(negedge clk) print_results;
-      //check_results; Aici apelam verificarea functiei check_results (TEMA!!! )
     end
 
     @(posedge clk) ;

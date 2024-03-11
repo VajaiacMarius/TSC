@@ -6,6 +6,9 @@
  *
  **********************************************************************/
 
+
+/* O functie check_res in care luam rezultatu received din dut cu rezultatul expected din test dar nu facem cum face dutu
+sau cu if else si la urma dupa tot if else punem un alt if separat si care trebuie sa faca comparatie intre rez calculcat de mn si cel primit, functia void,mesajul e cu $display ,trebuie adaugate multe printuri si sa afiseze pass/fail in functie de cum merge*/
 module instr_register
 import instr_register_pkg::*;  // user-defined types are defined in instr_register_pkg.sv
 (input  logic          clk,
@@ -36,7 +39,11 @@ import instr_register_pkg::*;  // user-defined types are defined in instr_regist
         ADD: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a + operand_b};
         SUB: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a - operand_b};
         MULT: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a * operand_b};
-        DIV: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a / operand_b};
+        DIV:if(operand_b == 0) begin
+            iw_reg[write_pointer]=0;
+        end
+            else begin
+        iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a / operand_b}; end
         MOD: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_a % operand_b};  
       endcase 
     end
