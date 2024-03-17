@@ -21,20 +21,10 @@ module instr_register_test
   );
 
   timeunit 1ns/1ns;
-  parameter  RD_NR = 20;
-  parameter  WR_NR = 20;
+  //11.02.2024 am adaugat parametrii ptr for si repeat
+  parameter  = RD_NR = 20 ;
+  parameter = WR_NR = 20;
   int seed = 555;
-  
-  //17.03.2024 ==============================
-   // Variabile pentru rezultatele așteptate și rezultatele primite
-  result_t expected_result;
-  result_t received_result;
-
-  // Inițializare pentru rezultatul așteptat (poate fi modificat după necesități)
-  initial begin
-    expected_result = 0; // De exemplu, inițializăm rezultatul așteptat cu 0
-  end
-
 
   initial begin
     $display("\n\n***********************************************************");
@@ -69,27 +59,6 @@ module instr_register_test
       // the expected values to be read back
       @(posedge clk) read_pointer = i;
       @(negedge clk) print_results;
-      //check_results; Aici apelam verificarea functiei check_results (TEMA!!! )---------------------------
- // Atribuirea rezultatului așteptat
-      case(instruction_word.opc)
-        ZERO: expected_result = 0;
-        PASSA: expected_result = instruction_word.op_a;
-        PASSB: expected_result = instruction_word.op_b;
-        ADD: expected_result = instruction_word.op_a + instruction_word.op_b;
-        SUB: expected_result = instruction_word.op_a - instruction_word.op_b;
-        MULT: expected_result = instruction_word.op_a * instruction_word.op_b;
-        DIV: if (instruction_word.op_b == 0) begin
-               expected_result = 4; // Împărțire la zero, atribuirea unei valori de eroare
-             end else begin
-               expected_result = instruction_word.rezultat; // Rezultatul așteptat este cel primit din DUT
-             end
-        MOD: expected_result = instruction_word.op_a % instruction_word.op_b;
-      endcase
-
- // Verificarea rezultatului
-      received_result = instruction_word.rezultat;
-      check_res(received_result, expected_result); // Verificare rezultat
-
     end
 
     @(posedge clk) ;
@@ -131,16 +100,5 @@ module instr_register_test
     $display("  operand_b = %0d\n", instruction_word.op_b);
     $display("  result_t = %0d\n", instruction_word.rezultat);
   endfunction: print_results
-
-  // Funcția check_res pentru compararea rezultatelor----------------------------------------------
-  function void check_res(result_t received_result, result_t expected_result);
-    if (received_result == expected_result) begin
-      $display("Test PASSED: rezultatul primit din test se aseamana cu cel din DUT.\n");
-    end else begin
-      $display("Test FAILED: rezultatele sunt diferite.\n");
-      $display("Received result: %d", received_result);
-      $display("Expected result: %d", expected_result);
-    end
-  endfunction
 
 endmodule: instr_register_test
