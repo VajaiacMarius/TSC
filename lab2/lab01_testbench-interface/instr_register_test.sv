@@ -24,6 +24,8 @@ module instr_register_test
   parameter  RD_NR = 20;
   parameter  WR_NR = 20;
   int seed = 555;
+
+   instruction_t  iw_reg_test [0:31];
   
   //17.03.2024 ==============================
    // Variabile pentru rezultatele așteptate și rezultatele primite
@@ -57,6 +59,7 @@ module instr_register_test
     repeat(RD_NR) begin 
       @(posedge clk) randomize_transaction;
       @(negedge clk) print_transaction;
+                     save_test_data;
     end
     @(posedge clk) load_en = 1'b0;  // turn-off writing to register
 
@@ -69,8 +72,10 @@ module instr_register_test
       // the expected values to be read back
       @(posedge clk) read_pointer = i;
       @(negedge clk) print_results;
-      //check_results; Aici apelam verificarea functiei check_results (TEMA!!! )---------------------------
+      //save_test_data;--------------------------
+      //check_results; Aici apelam verificarea functiei check_results (TEMA!!! )
  // Atribuirea rezultatului așteptat
+
       case(instruction_word.opc)
         ZERO: expected_result = 0;
         PASSA: expected_result = instruction_word.op_a;
@@ -79,15 +84,19 @@ module instr_register_test
         SUB: expected_result = instruction_word.op_a - instruction_word.op_b;
         MULT: expected_result = instruction_word.op_a * instruction_word.op_b;
         DIV: if (instruction_word.op_b == 0) begin
-               expected_result = 4; // Împărțire la zero, atribuirea unei valori de eroare
+               expected_result = 0; // Împărțire la zero, atribuirea unei valori de eroare
              end else begin
                expected_result = instruction_word.rezultat; // Rezultatul așteptat este cel primit din DUT
              end
-        MOD: expected_result = instruction_word.op_a % instruction_word.op_b;
+        MOD: if (instruction_word.op_b == 0) begin
+             expected_result = 0;
+               end else begin
+        expected_result = instruction_word.op_a % instruction_word.op_b; end
       endcase
 
  // Verificarea rezultatului
       received_result = instruction_word.rezultat;
+
       check_res(received_result, expected_result); // Verificare rezultat
 
     end
@@ -143,4 +152,33 @@ module instr_register_test
     end
   endfunction
 
+  function void save_test_data();
+      case (opcode)
+        ZERO: expected_result =  'b0; //rezultatul este setat la 0
+        PASSA: expected_result=  operand_a; //rezultatul este operandul A
+        PASSB: expected_result = operand_b;//rezultatul este operandul B
+        ADD: expected_result = '{operand_a + operand_b};
+        SUB:expected_result = '{operand_a - operand_b};
+        MULT: expected_result = '{operand_a * operand_b};
+        DIV:begin 
+        if(operand_b == 0) begin
+           expected_result <= 'b0;
+        end else begin
+        expected_result = '{operand_a / operand_b}; end
+        end
+        MOD: expected_result = '{operand_a % operand_b};  
+        iw_reg_test[i]=expected_result;
+      endcase 
+    always@(posedge clk, negedge reset_n)   // write into register 
+    if (!reset_n) begin
+      foreach (iw_reg[i])
+        iw_reg[i] = '{opc:ZERO,default:0};  // reset to all zeros 
+    end
+
+     $display("Read from test_save_data %0d: ", read_pointer);
+    $display("  opcode_test = %0d (%s)", opcode,opcode.name);
+    $display("  operand_a_test = %0d",   operand_a);
+    $display("  operand_b_test = %0d\n", operand_b);
+    $display("  result_t_test = %0d\n", rezultat);
+    endfunction
 endmodule: instr_register_test
