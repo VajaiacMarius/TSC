@@ -37,11 +37,11 @@ module instr_register_test
 
 
   initial begin
-    $display("\n\n***********************************************************");
-    $display(    "***  THIS IS NOT A SELF-CHECKING TESTBENCH (YET).  YOU  ***");
-    $display(    "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
-    $display(    "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
-    $display(    "***********************************************************");
+    $display("\n\n************************************************************");
+    $display(    "***  THIS IS A SELF-CHECKING TESTBENCH (YET).  YOU       ***");
+    $display(    "***  DONT NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES ***");
+    $display(    "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION   ***");
+    $display(    "************************************************************");
 
     $display("\nReseting the instruction register...");
     write_pointer  = 5'h00;         // initialize write pointer
@@ -94,13 +94,14 @@ module instr_register_test
 
     @(posedge clk) ;
     $display("\n***********************************************************");
-    $display(  "***  THIS IS NOT A SELF-CHECKING TESTBENCH (YET).  YOU  ***");
-    $display(  "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
+    $display(  "***  THIS IS  A SELF-CHECKING TESTBENCH (YET).  YOU  ***");
+    $display(  "***  DON'T NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES ***");
     $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
     $display(  "***********************************************************\n");
+    
     $finish;
   end
-
+   
   function void randomize_transaction;
     // A later lab will replace this function with SystemVerilog
     // constrained random values
