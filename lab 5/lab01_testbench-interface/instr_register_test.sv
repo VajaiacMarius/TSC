@@ -1,4 +1,4 @@
-/*************************
+/*************************!!!!  
  * A SystemVerilog testbench for an instruction register.
  * The course labs will convert this to an object-oriented testbench
  * with constrained random test generation, functional coverage, and
@@ -15,12 +15,17 @@ module instr_register_test
    output opcode_t       opcode,
    output address_t      write_pointer,
    output address_t      read_pointer,
+   output result_t       result,
    input  instruction_t  instruction_word
   );//dut ul are output care merge in test
 
+
   timeunit 1ns/1ns;
-  parameter readNumber  = 20;
-  parameter writeNumber = 20;
+  parameter readNumber  = 7;
+  parameter writeNumber = 7;
+  parameter WRITE_ORDER = 2; // 0 = incremental, 1 = random, 2 = decremental
+  parameter READ_ORDER = 1; // 0 = incremental, 1 = random, 2 = decremental
+  
 
   int seed = 555;
   instruction_t  iw_test_reg [0:31]; 
@@ -62,11 +67,11 @@ module instr_register_test
       @(negedge clk) print_results;
       checkResult;
     end
-    
+  
     @(posedge clk) ;
     $display("\n*********************");
     $display(  "*  THIS IS A SELF-CHECKING TESTBENCH (YET).  YOU  *");
-    $display(  "*  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     *");
+    $display(  "* DON'T NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     *");
     $display(  "*  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  *");
     $display(  "*********************\n");
     $finish;
@@ -79,12 +84,31 @@ module instr_register_test
     // The stactic temp variable is required in order to write to fixed
     // addresses of 0, 1 and 2.  This will be replaceed with randomizeed
     // write_pointer values in a later lab
-    //
-    static int temp = 0; // static se refera ca este alocata o singura data
+   static int temp2 = 31;
+    static int temp = 0;
+ // Modificarea pentru WRITE_ORDER 1
+  
+        // Folosiți logica existentă pentru ordinele incrementale și decrementale
+        case (WRITE_ORDER)
+            0: write_pointer = temp++;
+            1: write_pointer = $unsigned($random)%32;
+            2: write_pointer = temp2--;
+            default: $display("Non existent order");
+        endcase
+
+    // static se refera ca este alocata o singura data
     operand_a     <= $random(seed)%16;                 // between -15 and 15 | random este implementat in functie de vendor= producatorul toolui
     operand_b     <= $unsigned($random)%16;            // between 0 and 15 |unsinged converteste numerele negative in numere pozitive
     opcode        <= opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type| opcode_t' -inseamna cast =converstete la tipul opcode_t
-    write_pointer <= temp++;
+
+   case(READ_ORDER)
+    0: read_pointer = temp++;
+    1: read_pointer = $unsigned($random)%32;
+    2: read_pointer = temp2--;
+    default: $display("Non existent order");
+    endcase
+
+
   endfunction: randomize_transaction
 
   function void print_transaction;
