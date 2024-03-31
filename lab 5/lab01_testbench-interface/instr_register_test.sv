@@ -21,14 +21,18 @@ module instr_register_test
 
 
   timeunit 1ns/1ns;
-  parameter readNumber  = 7;
-  parameter writeNumber = 7;
+
+  parameter WRITE_NUMBER = 50;
+  parameter READ_NUMBER  = 50;
   parameter WRITE_ORDER = 2; // 0 = incremental, 1 = random, 2 = decremental
   parameter READ_ORDER = 1; // 0 = incremental, 1 = random, 2 = decremental
   
 
   int seed = 555;
   instruction_t  iw_test_reg [0:31]; 
+    // Variabile pentru contoare
+  int pass_count = 0;
+  int fail_count = 0;
 
 
   initial begin
@@ -39,7 +43,7 @@ module instr_register_test
     $display(    "*********************");
 
     $display("\nReseting the instruction register...");
-    write_pointer  = 5'h00;         // 5 biti in hexazecimal si toate in zero
+    write_pointer  = 5'h1F;         // 5 biti in hexazecimal si toate in zero
     read_pointer   = 5'h1F;         // initialize read pointer
     load_en        = 1'b0;          // initialize load control line
     reset_n       <= 1'b0;          // assert reset_n (active low)
@@ -49,7 +53,7 @@ module instr_register_test
     $display("\nWriting values to register stack...");
     @(posedge clk) load_en = 1'b1;  // enable writing to register
     // repeat (3) begin Chiper Stefan 03/11/2024 
-    repeat (readNumber) begin 
+    repeat (READ_NUMBER) begin 
       @(posedge clk) randomize_transaction;
       @(negedge clk) print_transaction;
       saveTestData;
@@ -59,7 +63,7 @@ module instr_register_test
     // read back and display same three register locations
     $display("\nReading back the same register locations written...");
     // for (int i=0; i<=2; i++) begin Chiper Stefan 03/11/2024
-    for (int i=0; i<=writeNumber; i++) begin
+    for (int i=0; i<  WRITE_NUMBER; i++) begin
       // later labs will replace this loop with iterating through a
       // scoreboard to determine which addresses were written and
       // the expected values to be read back
@@ -67,7 +71,7 @@ module instr_register_test
       @(negedge clk) print_results;
       checkResult;
     end
-  
+      final_report;
     @(posedge clk) ;
     $display("\n*********************");
     $display(  "*  THIS IS A SELF-CHECKING TESTBENCH (YET).  YOU  *");
@@ -76,41 +80,31 @@ module instr_register_test
     $display(  "*********************\n");
     $finish;
   end
-
+//functie randomize_transaction--------------------
   function void randomize_transaction;
-    // A later lab will replace this function with SystemVerilog
-    // constrained random values
-    //
-    // The stactic temp variable is required in order to write to fixed
-    // addresses of 0, 1 and 2.  This will be replaceed with randomizeed
-    // write_pointer values in a later lab
-   static int temp2 = 31;
+    static int temp_decremental = 31;
     static int temp = 0;
- // Modificarea pentru WRITE_ORDER 1
-  
-        // Folosiți logica existentă pentru ordinele incrementale și decrementale
-        case (WRITE_ORDER)
-            0: write_pointer = temp++;
-            1: write_pointer = $unsigned($random)%32;
-            2: write_pointer = temp2--;
-            default: $display("Non existent order");
-        endcase
 
-    // static se refera ca este alocata o singura data
-    operand_a     <= $random(seed)%16;                 // between -15 and 15 | random este implementat in functie de vendor= producatorul toolui
-    operand_b     <= $unsigned($random)%16;            // between 0 and 15 |unsinged converteste numerele negative in numere pozitive
-    opcode        <= opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type| opcode_t' -inseamna cast =converstete la tipul opcode_t
-
-   case(READ_ORDER)
-    0: read_pointer = temp++;
-    1: read_pointer = $unsigned($random)%32;
-    2: read_pointer = temp2--;
-    default: $display("Non existent order");
+    case (WRITE_ORDER)
+        0: write_pointer = write_pointer + 1; // Incremental order
+        1: write_pointer = $unsigned($random) % 32; // Random order
+        2: write_pointer = temp_decremental--; // Decremental order
+        default: $display("Non-existent write order");
     endcase
 
+    operand_a <= $random(seed) % 16;   
+    operand_b <= $unsigned($random) % 16;  
+    opcode <= opcode_t'($unsigned($random) % 8);  
 
-  endfunction: randomize_transaction
+    case (READ_ORDER)
+        0: read_pointer = temp++; // Incremental order
+        1: read_pointer = $unsigned($random) % 32; // Random order
+        2: read_pointer = temp_decremental--; // Decremental order
+        default: $display("Non-existent read order");
+    endcase
+endfunction: randomize_transaction
 
+//functie print_transaction--------------------
   function void print_transaction;
     $display("Writing to register location %0d: ", write_pointer);
     $display("  opcode = %0d (%s)", opcode, opcode.name);
@@ -118,6 +112,7 @@ module instr_register_test
     $display("  operand_b = %0d\n", operand_b);
   endfunction: print_transaction
 
+//functie print_results--------------------
   function void print_results;
     $display("Read from register location %0d: ", read_pointer);
     $display("  opcode = %0d (%s)", instruction_word.opc, instruction_word.opc.name);
@@ -126,6 +121,7 @@ module instr_register_test
     $display(" result_t = %0d\n", instruction_word.rezultat);
   endfunction: print_results
 
+//functie checkResult--------------------
   function void checkResult;
   int exp_result;
   if( iw_test_reg[read_pointer].opc== instruction_word.opc)
@@ -155,20 +151,27 @@ module instr_register_test
               exp_result = 0;
          else
               exp_result = iw_test_reg[read_pointer].op_a / iw_test_reg[read_pointer].op_b;
-    MOD: exp_result = iw_test_reg[read_pointer].op_a % iw_test_reg[read_pointer].op_b;
-    default: $display("Non existent operator");
+    MOD: if(!iw_test_reg[read_pointer].op_b)
+              exp_result = 0;
+         else
+              exp_result = iw_test_reg[read_pointer].op_a % iw_test_reg[read_pointer].op_b;
+    
 
   endcase
 
-  // Compararea rezultatului așteptat cu rezultatul primit de la DUT
-  if (exp_result == instruction_word.rezultat) begin
-    $display("Result check: Approved");
-  end else begin
-    $display("Result check: Unapproved");
-  end
+
+   // Compararea rezultatului așteptat cu rezultatul primit de la DUT
+    if (exp_result == instruction_word.rezultat) begin
+      $display("Result check: Approved");
+      pass_count++; // Incrementăm contorul pentru operații reușite
+    end else begin
+      $display("Result check: Unapproved");
+      fail_count++; // Incrementăm contorul pentru operații eșuate
+    end
   endfunction:checkResult
 
 
+  //functia saveTestData--------------------
   function void saveTestData;
 
   iw_test_reg[write_pointer] = '{opcode, operand_a,operand_b,0};
@@ -178,4 +181,12 @@ module instr_register_test
     $display("  operand_b = %0d", iw_test_reg[write_pointer].op_b);
   endfunction:saveTestData
 
+
+//functie final report--------------------
+  // Funcția final_report pentru afișarea rezumatului la sfârșit
+  function void final_report;
+    $display("\n--- FINAL REPORT ---");
+    $display("Operations passed: %0d/%0d.", pass_count, WRITE_NUMBER);
+    $display("Operations failed: %0d/%0d.", fail_count, WRITE_NUMBER);
+  endfunction: final_report
 endmodule: instr_register_test
