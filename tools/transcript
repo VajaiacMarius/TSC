@@ -1,0 +1,10 @@
+# vsim /? 
+# Start time: 08:36:25 on Apr 01,2024
+# ** Error (suppressible): (vsim-19) Failed to access library 'work' at "work".
+# No such file or directory. (errno = ENOENT)
+# Error loading design
+# End time: 08:36:25 on Apr 01,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# Break key hit
+# Break key hit
+# Break key hit
