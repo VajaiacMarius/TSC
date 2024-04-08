@@ -1,0 +1,237 @@
+# 1
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 09:23:15 on Apr 08,2024
+# vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
+# -- Compiling package instr_register_pkg
+# -- Compiling module instr_register
+# -- Importing package instr_register_pkg
+# -- Compiling module instr_register_test
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 09:23:16 on Apr 08,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GREAD_NUMBER=10 -GWRITE_ORDER=1 -GREAD_ORDER=2 -GWRITE_NUMBER=10 
+# Start time: 09:23:16 on Apr 08,2024
+# ** Warning: (vsim-3017) ../../TSC_Lab/lab01_testbench-interface/top.sv(24): [TFMPC] - Too few port connections. Expected 10, found 9.
+#    Time: 0 ns  Iteration: 0  Instance: /top/test File: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv
+# ** Warning: (vsim-3722) ../../TSC_Lab/lab01_testbench-interface/top.sv(24): [TFMPC] - Missing connection for port 'result'.
+# 
+# 
+# *********************
+# *  THIS IS A SELF-CHECKING TESTBENCH (YET).  YOU  *
+# * DON'T NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     *
+# *  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  *
+# *********************
+# 
+# Reseting the instruction register...
+# 
+# Writing values to register stack...
+# Writing to register location 4: 
+#   opcode = 1 (PASSA)
+#   operand_a = -12
+#   operand_b = 7
+# 
+# Read from register location 4: 
+#   opcode = 1 (PASSA)
+#   operand_a = -12
+#   operand_b = 7
+# Writing to register location 8: 
+#   opcode = 0 (ZERO)
+#   operand_a = -9
+#   operand_b = 1
+# 
+# Read from register location 8: 
+#   opcode = 0 (ZERO)
+#   operand_a = -9
+#   operand_b = 1
+# Writing to register location 7: 
+#   opcode = 7 (MOD)
+#   operand_a = -15
+#   operand_b = 8
+# 
+# Read from register location 7: 
+#   opcode = 7 (MOD)
+#   operand_a = -15
+#   operand_b = 8
+# Writing to register location 21: 
+#   opcode = 5 (MULT)
+#   operand_a = -8
+#   operand_b = 7
+# 
+# Read from register location 21: 
+#   opcode = 5 (MULT)
+#   operand_a = -8
+#   operand_b = 7
+# Writing to register location 3: 
+#   opcode = 3 (ADD)
+#   operand_a = -9
+#   operand_b = 5
+# 
+# Read from register location 3: 
+#   opcode = 3 (ADD)
+#   operand_a = -9
+#   operand_b = 5
+# Writing to register location 28: 
+#   opcode = 4 (SUB)
+#   operand_a = 5
+#   operand_b = 3
+# 
+# Read from register location 28: 
+#   opcode = 4 (SUB)
+#   operand_a = 5
+#   operand_b = 3
+# Writing to register location 3: 
+#   opcode = 3 (ADD)
+#   operand_a = 3
+#   operand_b = 12
+# 
+# Read from register location 3: 
+#   opcode = 3 (ADD)
+#   operand_a = 3
+#   operand_b = 12
+# Writing to register location 30: 
+#   opcode = 6 (DIV)
+#   operand_a = 12
+#   operand_b = 3
+# 
+# Read from register location 30: 
+#   opcode = 6 (DIV)
+#   operand_a = 12
+#   operand_b = 3
+# Writing to register location 25: 
+#   opcode = 1 (PASSA)
+#   operand_a = 3
+#   operand_b = 14
+# 
+# Read from register location 25: 
+#   opcode = 1 (PASSA)
+#   operand_a = 3
+#   operand_b = 14
+# Writing to register location 9: 
+#   opcode = 1 (PASSA)
+#   operand_a = -2
+#   operand_b = 9
+# 
+# Read from register location 9: 
+#   opcode = 1 (PASSA)
+#   operand_a = -2
+#   operand_b = 9
+# 
+# Reading back the same register locations written...
+# Read from register location 0: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#  result_t = 0
+# 
+# Opcode is incorrect from register location 0: 
+# Operant_a is incorrect from register location 0: 
+# Operant_b is incorrect from register location 0: 
+# Result check: Approved
+# Read from register location 1: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#  result_t = 0
+# 
+# Opcode is incorrect from register location 1: 
+# Operant_a is incorrect from register location 1: 
+# Operant_b is incorrect from register location 1: 
+# Result check: Approved
+# Read from register location 2: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#  result_t = 0
+# 
+# Opcode is incorrect from register location 2: 
+# Operant_a is incorrect from register location 2: 
+# Operant_b is incorrect from register location 2: 
+# Result check: Approved
+# Read from register location 3: 
+#   opcode = 3 (ADD)
+#   operand_a = 3
+#   operand_b = 12
+#  result_t = 15
+# 
+# Opcode is correct from register location 3: 
+# Operant_a is correct from register location 3: 
+# Operant_b is correct from register location 3: 
+# Result check: Approved
+# Read from register location 4: 
+#   opcode = 1 (PASSA)
+#   operand_a = -12
+#   operand_b = 7
+#  result_t = -12
+# 
+# Opcode is correct from register location 4: 
+# Operant_a is correct from register location 4: 
+# Operant_b is correct from register location 4: 
+# Result check: Approved
+# Read from register location 5: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#  result_t = 0
+# 
+# Opcode is incorrect from register location 5: 
+# Operant_a is incorrect from register location 5: 
+# Operant_b is incorrect from register location 5: 
+# Result check: Unapproved
+# Read from register location 6: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#  result_t = 0
+# 
+# Opcode is incorrect from register location 6: 
+# Operant_a is incorrect from register location 6: 
+# Operant_b is incorrect from register location 6: 
+# Result check: Unapproved
+# Read from register location 7: 
+#   opcode = 7 (MOD)
+#   operand_a = -15
+#   operand_b = 8
+#  result_t = -7
+# 
+# Opcode is correct from register location 7: 
+# Operant_a is correct from register location 7: 
+# Operant_b is correct from register location 7: 
+# Result check: Approved
+# Read from register location 8: 
+#   opcode = 0 (ZERO)
+#   operand_a = -9
+#   operand_b = 1
+#  result_t = 0
+# 
+# Opcode is correct from register location 8: 
+# Operant_a is correct from register location 8: 
+# Operant_b is correct from register location 8: 
+# Result check: Approved
+# Read from register location 9: 
+#   opcode = 1 (PASSA)
+#   operand_a = -2
+#   operand_b = 9
+#  result_t = -2
+# 
+# Opcode is correct from register location 9: 
+# Operant_a is correct from register location 9: 
+# Operant_b is correct from register location 9: 
+# Result check: Approved
+# 
+# --- FINAL REPORT ---
+# Operations passed: 8/10.
+# Operations failed: 2/10.
+# 
+# *********************
+# *  THIS IS A SELF-CHECKING TESTBENCH (YET).  YOU  *
+# * DON'T NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     *
+# *  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  *
+# *********************
+# 
+# ** Note: $finish    : ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(80)
+#    Time: 246 ns  Iteration: 1  Instance: /top/test
+# End time: 09:23:16 on Apr 08,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 2

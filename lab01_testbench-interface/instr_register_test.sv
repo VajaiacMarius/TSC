@@ -26,7 +26,7 @@ module instr_register_test
   parameter READ_NUMBER  = 50;
   parameter WRITE_ORDER = 2; // 0 = incremental, 1 = random, 2 = decremental
   parameter READ_ORDER = 1; // 0 = incremental, 1 = random, 2 = decremental
-  
+  parameter TEST_NAME
 
   int seed = 555;
   instruction_t  iw_test_reg [0:31]; 
@@ -38,7 +38,7 @@ module instr_register_test
   initial begin
     $display("\n\n*********************");
     $display(    "*  THIS IS A SELF-CHECKING TESTBENCH (YET).  YOU  *");
-    $display(    "*  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     *");
+    $display(    "* DON'T NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     *");
     $display(    "*  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  *");
     $display(    "*********************");
 
@@ -188,4 +188,8 @@ endfunction: randomize_transaction
     $display("Operations passed: %0d/%0d.", pass_count, WRITE_NUMBER);
     $display("Operations failed: %0d/%0d.", fail_count, WRITE_NUMBER);
   endfunction: final_report
+
+  //functie ce intra in transcript mai trebuie un parametru numit TEST_NAME , fup("../reports/regression_transcript/)
+  // pfdisplay ("TEST_NAME: %s", TEST_NAME); 
+  //fail pass display
 endmodule: instr_register_test
