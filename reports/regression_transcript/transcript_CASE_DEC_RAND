@@ -1,0 +1,27 @@
+# 1
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 02:02:24 on Apr 15,2024
+# vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
+# -- Compiling package instr_register_pkg
+# -- Compiling module instr_register
+# -- Importing package instr_register_pkg
+# -- Compiling module instr_register_test
+# ** Warning: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(83): (vlog-2240) Treating stand-alone use of function 'final_report' as an implicit VOID cast.
+# ** Warning: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(203): (vlog-2250) Function "final_report" has no return value assignment.
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 02:02:24 on Apr 15,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 2
+# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GCASE_NAME=CASE_DEC_RAND -GREAD_NUMBER=40 -GWRITE_ORDER=2 -GREAD_ORDER=1 -GWRITE_NUMBER=20 
+# Start time: 02:02:25 on Apr 15,2024
+# ** Error (suppressible): (vsim-7070) ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(86): Assigning a packed type 'reg[31:0]' to a string requires a cast.
+#    Time: 0 ns  Iteration: 0  Instance: /top/test File: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv
+# ** Error (suppressible): (vsim-7070) ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(122): Assigning a packed type 'reg[31:0]' to a string requires a cast.
+#    Time: 0 ns  Iteration: 0  Instance: /top/test File: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv
+# ** Error (suppressible): (vsim-7070) ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(131): Assigning a packed type 'reg[31:0]' to a string requires a cast.
+#    Time: 0 ns  Iteration: 0  Instance: /top/test File: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv
+# Error loading design
+# End time: 02:02:25 on Apr 15,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0

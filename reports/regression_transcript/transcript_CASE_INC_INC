@@ -1,0 +1,33 @@
+# 1
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 02:05:32 on Apr 15,2024
+# vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
+# -- Compiling package instr_register_pkg
+# -- Compiling module instr_register
+# -- Importing package instr_register_pkg
+# -- Compiling module instr_register_test
+# ** Error: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(37): 'file' is an unknown type.
+# Or did you omit the '()' for an instantiation?
+# ** Error: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(122): 'fd' is not a variable
+# ** Error: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(122): Illegal LHS of assignment.
+# ** Error: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(131): 'fd' is not a variable
+# ** Error: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(131): Illegal LHS of assignment.
+# ** Warning: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(83): (vlog-2240) Treating stand-alone use of function 'final_report' as an implicit VOID cast.
+# ** Error: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(86): 'fd' is not a variable
+# ** Error: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(86): Illegal LHS of assignment.
+# -- Compiling module top
+# End time: 02:05:32 on Apr 15,2024, Elapsed time: 0:00:00
+# Errors: 7, Warnings: 1
+# ** Error: C:/intelFPGA/18.1/modelsim_ase/win32aloem/vlog failed.
+# Error in macro ./run.do line 22
+# C:/intelFPGA/18.1/modelsim_ase/win32aloem/vlog failed.
+#     while executing
+# "vlog -sv -timescale "1ps/1ps" -work work       -f sources.txt"
+#     invoked from within
+# "if {$compile_on || [batch_mode] == 0} {
+#   vlib work
+#   vlog -sv -timescale "1ps/1ps" -work work       -f sources.txt
+#   #vlog -sv -timescale "1ps/1ps" -..."
+# Break key hit
+# 
+# <EOF>

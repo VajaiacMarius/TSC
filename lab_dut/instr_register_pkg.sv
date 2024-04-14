@@ -15,12 +15,6 @@ package instr_register_pkg;
     DIV,
     MOD
   } opcode_t;
-  
-  typedef enum logic [3:0] {
-    INC,
-    RAND,
-    DEC
-  } order_t;
 
  typedef logic signed [31:0] operand_t;   //registru
 

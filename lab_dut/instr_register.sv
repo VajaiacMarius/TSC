@@ -6,7 +6,6 @@
  *
  **********************************************************************/
 
-
 /* O functie check_res in care luam rezultatu received din dut cu rezultatul expected din test dar nu facem cum face dutu
 sau cu if else si la urma dupa tot if else punem un alt if separat si care trebuie sa faca comparatie intre rez calculcat de mn si cel primit, functia void,mesajul e cu $display ,trebuie adaugate multe printuri si sa afiseze pass/fail in functie de cum merge*/
 module instr_register
@@ -21,6 +20,7 @@ import instr_register_pkg::*;  // user-defined types are defined in instr_regist
  input  address_t      read_pointer,
  output instruction_t  instruction_word
 ); // input nu se modifica
+
   timeunit 1ns/1ns;
 
   instruction_t  iw_reg [0:31];  // an array of instruction_word structures
