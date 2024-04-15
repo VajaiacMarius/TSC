@@ -1,6 +1,6 @@
 # 1
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 02:02:14 on Apr 15,2024
+# Start time: 08:16:07 on Apr 15,2024
 # vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
 # -- Compiling package instr_register_pkg
 # -- Compiling module instr_register
@@ -12,16 +12,629 @@
 # 
 # Top level modules:
 # 	top
-# End time: 02:02:14 on Apr 15,2024, Elapsed time: 0:00:00
+# End time: 08:16:07 on Apr 15,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 2
 # vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GCASE_NAME=CASE_INC_RAND -GREAD_NUMBER=20 -GWRITE_ORDER=0 -GREAD_ORDER=1 -GWRITE_NUMBER=30 
-# Start time: 02:02:14 on Apr 15,2024
-# ** Error (suppressible): (vsim-7070) ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(86): Assigning a packed type 'reg[31:0]' to a string requires a cast.
-#    Time: 0 ns  Iteration: 0  Instance: /top/test File: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv
-# ** Error (suppressible): (vsim-7070) ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(122): Assigning a packed type 'reg[31:0]' to a string requires a cast.
-#    Time: 0 ns  Iteration: 0  Instance: /top/test File: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv
-# ** Error (suppressible): (vsim-7070) ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(131): Assigning a packed type 'reg[31:0]' to a string requires a cast.
-#    Time: 0 ns  Iteration: 0  Instance: /top/test File: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv
-# Error loading design
-# End time: 02:02:14 on Apr 15,2024, Elapsed time: 0:00:00
-# Errors: 3, Warnings: 0
+# Start time: 08:16:07 on Apr 15,2024
+# 
+# 
+# ***********************************************************
+# ***  THIS IS A SELF-CHECKING TESTBENCH .  YOU DON'T  ***
+# ***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***
+# ***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***
+# ***********************************************************
+# 
+# Reseting the instruction register...
+# 
+# Writing values to register stack...
+# -2147483645Writing to register location 0: 
+# -2147483645  opcode = 1 (PASSA)
+# -2147483645  operand_a = -12
+# -2147483645  operand_b = 7
+# 
+# Read from register location 0: 
+#   opcode = 1 (PASSA)
+#   operand_a = -12
+#   operand_b = 7
+# -2147483645Writing to register location 1: 
+# -2147483645  opcode = 0 (ZERO)
+# -2147483645  operand_a = -9
+# -2147483645  operand_b = 1
+# 
+# Read from register location 1: 
+#   opcode = 0 (ZERO)
+#   operand_a = -9
+#   operand_b = 1
+# -2147483645Writing to register location 2: 
+# -2147483645  opcode = 7 (MOD)
+# -2147483645  operand_a = -15
+# -2147483645  operand_b = 8
+# 
+# Read from register location 2: 
+#   opcode = 7 (MOD)
+#   operand_a = -15
+#   operand_b = 8
+# -2147483645Writing to register location 3: 
+# -2147483645  opcode = 5 (MULT)
+# -2147483645  operand_a = -8
+# -2147483645  operand_b = 7
+# 
+# Read from register location 3: 
+#   opcode = 5 (MULT)
+#   operand_a = -8
+#   operand_b = 7
+# -2147483645Writing to register location 4: 
+# -2147483645  opcode = 3 (ADD)
+# -2147483645  operand_a = -9
+# -2147483645  operand_b = 5
+# 
+# Read from register location 4: 
+#   opcode = 3 (ADD)
+#   operand_a = -9
+#   operand_b = 5
+# -2147483645Writing to register location 5: 
+# -2147483645  opcode = 4 (SUB)
+# -2147483645  operand_a = 5
+# -2147483645  operand_b = 3
+# 
+# Read from register location 5: 
+#   opcode = 4 (SUB)
+#   operand_a = 5
+#   operand_b = 3
+# -2147483645Writing to register location 6: 
+# -2147483645  opcode = 3 (ADD)
+# -2147483645  operand_a = 3
+# -2147483645  operand_b = 12
+# 
+# Read from register location 6: 
+#   opcode = 3 (ADD)
+#   operand_a = 3
+#   operand_b = 12
+# -2147483645Writing to register location 7: 
+# -2147483645  opcode = 6 (DIV)
+# -2147483645  operand_a = 12
+# -2147483645  operand_b = 3
+# 
+# Read from register location 7: 
+#   opcode = 6 (DIV)
+#   operand_a = 12
+#   operand_b = 3
+# -2147483645Writing to register location 8: 
+# -2147483645  opcode = 1 (PASSA)
+# -2147483645  operand_a = 3
+# -2147483645  operand_b = 14
+# 
+# Read from register location 8: 
+#   opcode = 1 (PASSA)
+#   operand_a = 3
+#   operand_b = 14
+# -2147483645Writing to register location 9: 
+# -2147483645  opcode = 1 (PASSA)
+# -2147483645  operand_a = -2
+# -2147483645  operand_b = 9
+# 
+# Read from register location 9: 
+#   opcode = 1 (PASSA)
+#   operand_a = -2
+#   operand_b = 9
+# -2147483645Writing to register location 10: 
+# -2147483645  opcode = 7 (MOD)
+# -2147483645  operand_a = 9
+# -2147483645  operand_b = 9
+# 
+# Read from register location 10: 
+#   opcode = 7 (MOD)
+#   operand_a = 9
+#   operand_b = 9
+# -2147483645Writing to register location 11: 
+# -2147483645  opcode = 3 (ADD)
+# -2147483645  operand_a = 9
+# -2147483645  operand_b = 7
+# 
+# Read from register location 11: 
+#   opcode = 3 (ADD)
+#   operand_a = 9
+#   operand_b = 7
+# -2147483645Writing to register location 12: 
+# -2147483645  opcode = 5 (MULT)
+# -2147483645  operand_a = 7
+# -2147483645  operand_b = 3
+# 
+# Read from register location 12: 
+#   opcode = 5 (MULT)
+#   operand_a = 7
+#   operand_b = 3
+# -2147483645Writing to register location 13: 
+# -2147483645  opcode = 7 (MOD)
+# -2147483645  operand_a = 3
+# -2147483645  operand_b = 5
+# 
+# Read from register location 13: 
+#   opcode = 7 (MOD)
+#   operand_a = 3
+#   operand_b = 5
+# -2147483645Writing to register location 14: 
+# -2147483645  opcode = 0 (ZERO)
+# -2147483645  operand_a = -11
+# -2147483645  operand_b = 15
+# 
+# Read from register location 14: 
+#   opcode = 0 (ZERO)
+#   operand_a = -11
+#   operand_b = 15
+# -2147483645Writing to register location 15: 
+# -2147483645  opcode = 6 (DIV)
+# -2147483645  operand_a = 15
+# -2147483645  operand_b = 0
+# 
+# Read from register location 15: 
+#   opcode = 6 (DIV)
+#   operand_a = 15
+#   operand_b = 0
+# -2147483645Writing to register location 16: 
+# -2147483645  opcode = 4 (SUB)
+# -2147483645  operand_a = 0
+# -2147483645  operand_b = 14
+# 
+# Read from register location 16: 
+#   opcode = 4 (SUB)
+#   operand_a = 0
+#   operand_b = 14
+# -2147483645Writing to register location 17: 
+# -2147483645  opcode = 3 (ADD)
+# -2147483645  operand_a = -2
+# -2147483645  operand_b = 4
+# 
+# Read from register location 17: 
+#   opcode = 3 (ADD)
+#   operand_a = -2
+#   operand_b = 4
+# -2147483645Writing to register location 18: 
+# -2147483645  opcode = 0 (ZERO)
+# -2147483645  operand_a = -12
+# -2147483645  operand_b = 3
+# 
+# Read from register location 18: 
+#   opcode = 0 (ZERO)
+#   operand_a = -12
+#   operand_b = 3
+# -2147483645Writing to register location 19: 
+# -2147483645  opcode = 4 (SUB)
+# -2147483645  operand_a = -13
+# -2147483645  operand_b = 8
+# 
+# Read from register location 19: 
+#   opcode = 4 (SUB)
+#   operand_a = -13
+#   operand_b = 8
+# -2147483645Writing to register location 20: 
+# -2147483645  opcode = 1 (PASSA)
+# -2147483645  operand_a = -8
+# -2147483645  operand_b = 12
+# 
+# Read from register location 20: 
+#   opcode = 1 (PASSA)
+#   operand_a = -8
+#   operand_b = 12
+# -2147483645Writing to register location 21: 
+# -2147483645  opcode = 1 (PASSA)
+# -2147483645  operand_a = -4
+# -2147483645  operand_b = 1
+# 
+# Read from register location 21: 
+#   opcode = 1 (PASSA)
+#   operand_a = -4
+#   operand_b = 1
+# -2147483645Writing to register location 22: 
+# -2147483645  opcode = 1 (PASSA)
+# -2147483645  operand_a = -15
+# -2147483645  operand_b = 1
+# 
+# Read from register location 22: 
+#   opcode = 1 (PASSA)
+#   operand_a = -15
+#   operand_b = 1
+# -2147483645Writing to register location 23: 
+# -2147483645  opcode = 7 (MOD)
+# -2147483645  operand_a = 1
+# -2147483645  operand_b = 1
+# 
+# Read from register location 23: 
+#   opcode = 7 (MOD)
+#   operand_a = 1
+#   operand_b = 1
+# -2147483645Writing to register location 24: 
+# -2147483645  opcode = 5 (MULT)
+# -2147483645  operand_a = 1
+# -2147483645  operand_b = 15
+# 
+# Read from register location 24: 
+#   opcode = 5 (MULT)
+#   operand_a = 1
+#   operand_b = 15
+# -2147483645Writing to register location 25: 
+# -2147483645  opcode = 7 (MOD)
+# -2147483645  operand_a = -1
+# -2147483645  operand_b = 5
+# 
+# Read from register location 25: 
+#   opcode = 7 (MOD)
+#   operand_a = -1
+#   operand_b = 5
+# -2147483645Writing to register location 26: 
+# -2147483645  opcode = 4 (SUB)
+# -2147483645  operand_a = 5
+# -2147483645  operand_b = 7
+# 
+# Read from register location 26: 
+#   opcode = 4 (SUB)
+#   operand_a = 5
+#   operand_b = 7
+# -2147483645Writing to register location 27: 
+# -2147483645  opcode = 4 (SUB)
+# -2147483645  operand_a = -9
+# -2147483645  operand_b = 4
+# 
+# Read from register location 27: 
+#   opcode = 4 (SUB)
+#   operand_a = -9
+#   operand_b = 4
+# -2147483645Writing to register location 28: 
+# -2147483645  opcode = 5 (MULT)
+# -2147483645  operand_a = 4
+# -2147483645  operand_b = 12
+# 
+# Read from register location 28: 
+#   opcode = 5 (MULT)
+#   operand_a = 4
+#   operand_b = 12
+# -2147483645Writing to register location 29: 
+# -2147483645  opcode = 3 (ADD)
+# -2147483645  operand_a = 12
+# -2147483645  operand_b = 5
+# 
+# Read from register location 29: 
+#   opcode = 3 (ADD)
+#   operand_a = 12
+#   operand_b = 5
+# 
+# Reading back the same register locations written...
+# -2147483644Read from register location 31: 
+# -2147483644  opcode = 0 (ZERO)
+# -2147483644  operand_a = 0
+# -2147483644  operand_b = 0
+# -2147483644 result_t = 0
+# 
+# Opcode is correct from register location 31: 
+# Opcode is incorrect from register location 31: 
+# Operant_a is correct from register location 31: 
+# Operant_a is incorrect from register location 31: 
+# Operant_b is correct from register location 31: 
+# Operant_b is incorrect from register location 31: 
+# Transaction {ZERO, 0, 0, 0} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 30: 
+# -2147483644  opcode = 0 (ZERO)
+# -2147483644  operand_a = 0
+# -2147483644  operand_b = 0
+# -2147483644 result_t = 0
+# 
+# Opcode is correct from register location 30: 
+# Opcode is incorrect from register location 30: 
+# Operant_a is correct from register location 30: 
+# Operant_a is incorrect from register location 30: 
+# Operant_b is correct from register location 30: 
+# Operant_b is incorrect from register location 30: 
+# Transaction {ZERO, 0, 0, 0} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 29: 
+# -2147483644  opcode = 3 (ADD)
+# -2147483644  operand_a = 12
+# -2147483644  operand_b = 5
+# -2147483644 result_t = 17
+# 
+# Opcode is correct from register location 29: 
+# Opcode is incorrect from register location 29: 
+# Operant_a is correct from register location 29: 
+# Operant_a is incorrect from register location 29: 
+# Operant_b is correct from register location 29: 
+# Operant_b is incorrect from register location 29: 
+# Transaction {ADD, 12, 5, 17} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 28: 
+# -2147483644  opcode = 5 (MULT)
+# -2147483644  operand_a = 4
+# -2147483644  operand_b = 12
+# -2147483644 result_t = 48
+# 
+# Opcode is correct from register location 28: 
+# Opcode is incorrect from register location 28: 
+# Operant_a is correct from register location 28: 
+# Operant_a is incorrect from register location 28: 
+# Operant_b is correct from register location 28: 
+# Operant_b is incorrect from register location 28: 
+# Transaction {MULT, 4, 12, 48} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 27: 
+# -2147483644  opcode = 4 (SUB)
+# -2147483644  operand_a = -9
+# -2147483644  operand_b = 4
+# -2147483644 result_t = -13
+# 
+# Opcode is correct from register location 27: 
+# Opcode is incorrect from register location 27: 
+# Operant_a is correct from register location 27: 
+# Operant_a is incorrect from register location 27: 
+# Operant_b is correct from register location 27: 
+# Operant_b is incorrect from register location 27: 
+# Transaction {SUB, -9, 4, -13} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 26: 
+# -2147483644  opcode = 4 (SUB)
+# -2147483644  operand_a = 5
+# -2147483644  operand_b = 7
+# -2147483644 result_t = -2
+# 
+# Opcode is correct from register location 26: 
+# Opcode is incorrect from register location 26: 
+# Operant_a is correct from register location 26: 
+# Operant_a is incorrect from register location 26: 
+# Operant_b is correct from register location 26: 
+# Operant_b is incorrect from register location 26: 
+# Transaction {SUB, 5, 7, -2} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 25: 
+# -2147483644  opcode = 7 (MOD)
+# -2147483644  operand_a = -1
+# -2147483644  operand_b = 5
+# -2147483644 result_t = -1
+# 
+# Opcode is correct from register location 25: 
+# Opcode is incorrect from register location 25: 
+# Operant_a is correct from register location 25: 
+# Operant_a is incorrect from register location 25: 
+# Operant_b is correct from register location 25: 
+# Operant_b is incorrect from register location 25: 
+# Transaction {MOD, -1, 5, -1} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 24: 
+# -2147483644  opcode = 5 (MULT)
+# -2147483644  operand_a = 1
+# -2147483644  operand_b = 15
+# -2147483644 result_t = 15
+# 
+# Opcode is correct from register location 24: 
+# Opcode is incorrect from register location 24: 
+# Operant_a is correct from register location 24: 
+# Operant_a is incorrect from register location 24: 
+# Operant_b is correct from register location 24: 
+# Operant_b is incorrect from register location 24: 
+# Transaction {MULT, 1, 15, 15} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 23: 
+# -2147483644  opcode = 7 (MOD)
+# -2147483644  operand_a = 1
+# -2147483644  operand_b = 1
+# -2147483644 result_t = 0
+# 
+# Opcode is correct from register location 23: 
+# Opcode is incorrect from register location 23: 
+# Operant_a is correct from register location 23: 
+# Operant_a is incorrect from register location 23: 
+# Operant_b is correct from register location 23: 
+# Operant_b is incorrect from register location 23: 
+# Transaction {MOD, 1, 1, 0} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 22: 
+# -2147483644  opcode = 1 (PASSA)
+# -2147483644  operand_a = -15
+# -2147483644  operand_b = 1
+# -2147483644 result_t = -15
+# 
+# Opcode is correct from register location 22: 
+# Opcode is incorrect from register location 22: 
+# Operant_a is correct from register location 22: 
+# Operant_a is incorrect from register location 22: 
+# Operant_b is correct from register location 22: 
+# Operant_b is incorrect from register location 22: 
+# Transaction {PASSA, -15, 1, -15} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 21: 
+# -2147483644  opcode = 1 (PASSA)
+# -2147483644  operand_a = -4
+# -2147483644  operand_b = 1
+# -2147483644 result_t = -4
+# 
+# Opcode is correct from register location 21: 
+# Opcode is incorrect from register location 21: 
+# Operant_a is correct from register location 21: 
+# Operant_a is incorrect from register location 21: 
+# Operant_b is correct from register location 21: 
+# Operant_b is incorrect from register location 21: 
+# Transaction {PASSA, -4, 1, -4} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 20: 
+# -2147483644  opcode = 1 (PASSA)
+# -2147483644  operand_a = -8
+# -2147483644  operand_b = 12
+# -2147483644 result_t = -8
+# 
+# Opcode is correct from register location 20: 
+# Opcode is incorrect from register location 20: 
+# Operant_a is correct from register location 20: 
+# Operant_a is incorrect from register location 20: 
+# Operant_b is correct from register location 20: 
+# Operant_b is incorrect from register location 20: 
+# Transaction {PASSA, -8, 12, -8} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 19: 
+# -2147483644  opcode = 4 (SUB)
+# -2147483644  operand_a = -13
+# -2147483644  operand_b = 8
+# -2147483644 result_t = -21
+# 
+# Opcode is correct from register location 19: 
+# Opcode is incorrect from register location 19: 
+# Operant_a is correct from register location 19: 
+# Operant_a is incorrect from register location 19: 
+# Operant_b is correct from register location 19: 
+# Operant_b is incorrect from register location 19: 
+# Transaction {SUB, -13, 8, -21} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 18: 
+# -2147483644  opcode = 0 (ZERO)
+# -2147483644  operand_a = -12
+# -2147483644  operand_b = 3
+# -2147483644 result_t = 0
+# 
+# Opcode is correct from register location 18: 
+# Opcode is incorrect from register location 18: 
+# Operant_a is correct from register location 18: 
+# Operant_a is incorrect from register location 18: 
+# Operant_b is correct from register location 18: 
+# Operant_b is incorrect from register location 18: 
+# Transaction {ZERO, -12, 3, 0} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 17: 
+# -2147483644  opcode = 3 (ADD)
+# -2147483644  operand_a = -2
+# -2147483644  operand_b = 4
+# -2147483644 result_t = 2
+# 
+# Opcode is correct from register location 17: 
+# Opcode is incorrect from register location 17: 
+# Operant_a is correct from register location 17: 
+# Operant_a is incorrect from register location 17: 
+# Operant_b is correct from register location 17: 
+# Operant_b is incorrect from register location 17: 
+# Transaction {ADD, -2, 4, 2} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 16: 
+# -2147483644  opcode = 4 (SUB)
+# -2147483644  operand_a = 0
+# -2147483644  operand_b = 14
+# -2147483644 result_t = -14
+# 
+# Opcode is correct from register location 16: 
+# Opcode is incorrect from register location 16: 
+# Operant_a is correct from register location 16: 
+# Operant_a is incorrect from register location 16: 
+# Operant_b is correct from register location 16: 
+# Operant_b is incorrect from register location 16: 
+# Transaction {SUB, 0, 14, -14} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 15: 
+# -2147483644  opcode = 6 (DIV)
+# -2147483644  operand_a = 15
+# -2147483644  operand_b = 0
+# -2147483644 result_t = 0
+# 
+# Opcode is correct from register location 15: 
+# Opcode is incorrect from register location 15: 
+# Operant_a is correct from register location 15: 
+# Operant_a is incorrect from register location 15: 
+# Operant_b is correct from register location 15: 
+# Operant_b is incorrect from register location 15: 
+# Transaction {DIV, 15, 0, 0} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 14: 
+# -2147483644  opcode = 0 (ZERO)
+# -2147483644  operand_a = -11
+# -2147483644  operand_b = 15
+# -2147483644 result_t = 0
+# 
+# Opcode is correct from register location 14: 
+# Opcode is incorrect from register location 14: 
+# Operant_a is correct from register location 14: 
+# Operant_a is incorrect from register location 14: 
+# Operant_b is correct from register location 14: 
+# Operant_b is incorrect from register location 14: 
+# Transaction {ZERO, -11, 15, 0} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 13: 
+# -2147483644  opcode = 7 (MOD)
+# -2147483644  operand_a = 3
+# -2147483644  operand_b = 5
+# -2147483644 result_t = 3
+# 
+# Opcode is correct from register location 13: 
+# Opcode is incorrect from register location 13: 
+# Operant_a is correct from register location 13: 
+# Operant_a is incorrect from register location 13: 
+# Operant_b is correct from register location 13: 
+# Operant_b is incorrect from register location 13: 
+# Transaction {MOD, 3, 5, 3} failed
+# 
+# 
+# Result check: Approved
+# -2147483644Read from register location 12: 
+# -2147483644  opcode = 5 (MULT)
+# -2147483644  operand_a = 7
+# -2147483644  operand_b = 3
+# -2147483644 result_t = 21
+# 
+# Opcode is correct from register location 12: 
+# Opcode is incorrect from register location 12: 
+# Operant_a is correct from register location 12: 
+# Operant_a is incorrect from register location 12: 
+# Operant_b is correct from register location 12: 
+# Operant_b is incorrect from register location 12: 
+# Transaction {MULT, 7, 3, 21} failed
+# 
+# 
+# Result check: Approved
+# Failed tests 0: 
+# Passed tests 20: 
+# -2147483643
+# Number of errors per transactions: 0
+# -2147483643
+# Number of failed tests: 20
+# -2147483643
+# Failed tests percentage: 66.67%
+# 
+# ***********************************************************
+# ***  THIS IS A SELF-CHECKING TESTBENCH .  YOU DON'T  ***
+# ***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***
+# ***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***
+# ***********************************************************
+# 
+# ** Note: $finish    : ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(96)
+#    Time: 546 ns  Iteration: 1  Instance: /top/test
+# End time: 08:16:08 on Apr 15,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

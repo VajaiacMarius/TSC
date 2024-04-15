@@ -1,0 +1,23 @@
+# 1
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 08:30:01 on Apr 15,2024
+# vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
+# -- Compiling package instr_register_pkg
+# -- Compiling module instr_register
+# -- Importing package instr_register_pkg
+# -- Compiling module instr_register_test
+# ** Note: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(125): (vlog-13177) Promoting concatenation '{opcode,operand_a,operand_b,...}' to an assignment pattern:  Unsized literal found.
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 08:30:01 on Apr 15,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Error: can't read "6": no such variable
+# Error in macro ./run.do line 27
+# can't read "6": no such variable
+#     while executing
+# "eval vsim -novopt -quiet -nocoverage +notimingchecks +nowarnTSCALE -GWRITE_NR=$1 -GREAD_NR=$2 -GWRITE_ORDER=$3 -GREAD_ORDER=$4 -GCASE_NAME=$5 -GSEED_V..."
+# Break key hit
+# 
+# <EOF>

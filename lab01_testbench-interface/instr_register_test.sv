@@ -1,9 +1,9 @@
-/***********************************************************************
+/*************************
  * A SystemVerilog testbench for an instruction register.
  * The course labs will convert this to an object-oriented testbench
  * with constrained random test generation, functional coverage, and
  * a scoreboard for self-verification.
- **********************************************************************/
+ ************************/
 
 module instr_register_test
   import instr_register_pkg::*;  // user-defined types are defined in instr_register_pkg.sv
@@ -16,86 +16,83 @@ module instr_register_test
    output address_t      write_pointer,
    output address_t      read_pointer,
    input  instruction_t  instruction_word
-  );//dut ul are output care merge in test
+  );
 
   timeunit 1ns/1ns;
-  parameter READ_NUMBER  = 49;
-  parameter WRITE_NUMBER = 50;
-  parameter WRITE_ORDER = 2;
-  parameter READ_ORDER = 0;
+
+  parameter WRITE_NR = 50;
+  parameter READ_NR = 49;
+  parameter WRITE_ORDER = 0; // 0 - incremental, 1 - random, 2 - decremental
+  parameter READ_ORDER = 0; // 0 - incremental, 1 - random, 2 - decremental
   parameter CASE_NAME;
-//se ia doar primi 5 biti de la int deoarece e pe 5 biti , si de asta read si writePointer ajunge pana la maxim 31 si dupa face overflow s
-// se reseteaza in 0
-  //parameter TEST_REG;
-  int seed = 555;
-  instruction_t  iw_test_reg [0:31]; 
-  int number_of_errors_per_test = 0;
+  parameter SEED_VAL=555;
+
+  int seed = SEED_VAL;
+  int passed_tests = 0;
   int failed_tests = 0;
-  int passedTest=0;
-  int failedTest=0;
-  string filename = $sformatf("../sim/%s", CASE_NAME);
-  int fd;
+  instruction_t save_data [0:31];
+
   initial begin
-    $display("\n\n***********************************************************");
-    $display(    "***  THIS IS A SELF-CHECKING TESTBENCH .  YOU DON'T  ***");
-    $display(    "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
-    $display(    "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
-    $display(    "***********************************************************");
+    $display("\n**********************");
+    $display(  "*  THIS IS A SELF-CHECKING TESTBENCH. YOU DON'T        *");
+    $display(  "*    NEED TO VISUALLY VERIFY THE OUTPUT VALUES         *");
+    $display(  "* TO MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION *");
+    $display(  "********************\n");
 
     $display("\nReseting the instruction register...");
-    write_pointer  = 5'h00;         // 5 biti in hexazecimal si toate in zero
+    write_pointer  = 5'h00;         // initialize write pointer
     read_pointer   = 5'h1F;         // initialize read pointer
     load_en        = 1'b0;          // initialize load control line
     reset_n       <= 1'b0;          // assert reset_n (active low)
-    foreach ( iw_test_reg[i]) begin
-       iw_test_reg[i] = '{opc: ZERO, default: 0};
-    end
+    foreach (save_data[i])
+      save_data[i] = '{opc:ZERO,default:0};  // reset to all zeros
     repeat (2) @(posedge clk) ;     // hold in reset for 2 clock cycles
     reset_n        = 1'b1;          // deassert reset_n (active low)
 
     $display("\nWriting values to register stack...");
     @(posedge clk) load_en = 1'b1;  // enable writing to register
-    // repeat (3) begin Vajaic ANdrei Marius 03/11/2024 
-    repeat (WRITE_NUMBER) begin 
-      @(posedge clk) randomize_transaction;
-      @(negedge clk) print_transaction;
-      saveTestData;
+    // repeat (3) begin - 11/03/2024 -Chiper Stefan
+    repeat (WRITE_NR) begin
+      @(posedge clk) begin
+        randomize_transaction;
+        save_test_data;
+      end
+      // @(negedge clk) print_transaction; - 14/04/2024 - Chiper Stefan
     end
     @(posedge clk) load_en = 1'b0;  // turn-off writing to register
 
     // read back and display same three register locations
     $display("\nReading back the same register locations written...");
-    // for (int i=0; i<=2; i++) begin Vajaic ANdrei Marius 03/11/2024
-    for (int i=0; i< READ_NUMBER; i++) begin
+    // for (int i=0; i<=2; i++) begin - 11/03/2024 - Chiper Stefan
+    for (int i=0; i<=READ_NR; i++) begin
       // later labs will replace this loop with iterating through a
       // scoreboard to determine which addresses were written and
       // the expected values to be read back
-      // @(posedge clk) read_pointer = i;
-      case(READ_ORDER)
-      0: @(posedge clk) read_pointer = i;
-      1: @(posedge clk) read_pointer = 31-(i%32);
-      2: @(posedge clk) read_pointer = $unsigned($random)%32;
-      endcase
-      @(negedge clk) print_results;
-      checkResult;
+      @(posedge clk) begin
+        if(READ_ORDER == 0)
+          read_pointer = i;
+        if(READ_ORDER == 1)
+          read_pointer = $unsigned($random)%32;
+        if(READ_ORDER == 2)
+          read_pointer = 31 - (i % 32);
+      end
+      @(negedge clk) test_data;
+      // @(negedge clk) print_results; 18.03.2024 -Chiper Stefan
+      check_results;
     end
-    
-     final_report;
 
-    @(posedge clk) ;
-     fd= $fopen(filename,"a");
-    $display(fd,"\nNumber of errors per transactions: %0d", number_of_errors_per_test);
-    $display(fd,"\nNumber of failed tests: %0d", failed_tests);
-    $display(fd,"\nFailed tests percentage: %0.2f%%", (failed_tests* 100.0) / WRITE_NUMBER);
-    $fclose(fd);
-    $display("\n***********************************************************");
-    $display(  "***  THIS IS A SELF-CHECKING TESTBENCH .  YOU DON'T  ***");
-    $display(  "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
-    $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
-    $display(  "***********************************************************\n");
+    @(posedge clk);
+    final_report;
+    overall_report;
+
+    $display("\n*********************");
+    $display(  "*  THIS IS NOW A SELF-CHECKING TESTBENCH. YOU NO        *");
+    $display(  "*  LONGER NEED TO VISUALLY VERIFY THE OUTPUT VALUES     *");
+    $display(  "* TO MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  *");
+    $display(  "*********************\n");
     $finish;
   end
- 
+
   function void randomize_transaction;
     // A later lab will replace this function with SystemVerilog
     // constrained random values
@@ -104,107 +101,117 @@ module instr_register_test
     // addresses of 0, 1 and 2.  This will be replaceed with randomizeed
     // write_pointer values in a later lab
     //
-    static int temp = 0; // static se refera ca este alocata o singura data
-    static int temp_decrement = 31;
-    operand_a     <= $random(seed)%16;                 // between -15 and 15 | random este implementat in functie de vendor= producatorul toolui
-    operand_b     <= $unsigned($random)%16;            // between 0 and 15 |unsinged converteste numerele negative in numere pozitive
-    opcode        <= opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type| opcode_t' -inseamna cast =converstete la tipul opcode_t
-    
-    case (WRITE_ORDER) 
-      0: write_pointer = temp++;
-      1: write_pointer = temp_decrement--;
-      2: write_pointer = $unsigned($random)%32;
-    endcase
-
+    static int temp = 0;
+    static int temp2 = 31;
+    operand_a     <= $random(seed)%16;                 // between -15 and 15
+    operand_b     <= $unsigned($random)%16;            // between 0 and 15
+    opcode        <= opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
+    if(WRITE_ORDER == 0)
+      write_pointer <= temp++;
+    if(WRITE_ORDER == 1)
+      write_pointer <= $unsigned($random)%32;
+    if(WRITE_ORDER == 2)
+      write_pointer <= temp2--;
   endfunction: randomize_transaction
 
   function void print_transaction;
-    fd= $fopen(filename,"a");
-    $display(fd,"Writing to register location %0d: ", write_pointer);
-    $display(fd,"  opcode = %0d (%s)", opcode, opcode.name);
-    $display(fd,"  operand_a = %0d",   operand_a);
-    $display(fd,"  operand_b = %0d\n", operand_b);
-     $fclose(fd);
+    $display("Writing to register location %0d: ", write_pointer);
+    $display("  opcode = %0d (%s)", opcode, opcode.name);
+    $display("  operand_a = %0d",   operand_a);
+    $display("  operand_b = %0d\n", operand_b);
   endfunction: print_transaction
 
+  function void save_test_data;
+    save_data[write_pointer] = {opcode, operand_a, operand_b, 0};
+  endfunction: save_test_data
+
+  function void test_data;
+    if(save_data[read_pointer].opc != instruction_word.opc)begin
+      $display("Register Location %0d: DUT opcode %0d (%s), saved opcode %0d (%s)", read_pointer, instruction_word.opc, instruction_word.opc.name, save_data[read_pointer].opc, save_data[read_pointer].opc.name);
+      failed_tests++;
+    end
+    else if(save_data[read_pointer].op_a != instruction_word.op_a) begin
+      $display("Register Location %0d: DUT operand_a %0d, saved operand_a %0d", read_pointer, instruction_word.op_a, save_data[read_pointer].op_a);
+      failed_tests++;
+    end
+    else if(save_data[read_pointer].op_b != instruction_word.op_b) begin
+      $display("Register Location %0d: DUT operand_b %0d, saved operand_b %0d", read_pointer, instruction_word.op_b, save_data[read_pointer].op_b);
+      failed_tests++;
+    end
+    else begin
+      // $display("OK: Saved data matches the DUT data for location %0d", read_pointer);
+      passed_tests++;
+    end
+  endfunction: test_data;
+
   function void print_results;
-    fd= $fopen(filename,"a");
-    $display(fd,"Read from register location %0d: ", read_pointer);
-    $display(fd,"  opcode = %0d (%s)", instruction_word.opc, instruction_word.opc.name);
-    $display(fd,"  operand_a = %0d",   instruction_word.op_a);
-    $display(fd,"  operand_b = %0d", instruction_word.op_b);
-    $display(fd," result_t = %0d\n", instruction_word.rezultat);
-   $fclose(fd);
+    $display("Read from register location %0d: ", read_pointer);
+    $display("  opcode = %0d (%s)", instruction_word.opc, instruction_word.opc.name);
+    $display("  operand_a = %0d",   instruction_word.op_a);
+    $display("  operand_b = %0d", instruction_word.op_b);
+    $display("  result = %0d\n", instruction_word.rezultat);
   endfunction: print_results
 
-  function void checkResult;
-  int exp_result;
-  static bit has_error = 1'b0;
-  if( iw_test_reg[read_pointer].opc == instruction_word.opc  )
-    $display("Opcode is correct from register location %0d: ", read_pointer);
-  else
-    number_of_errors_per_test++;
-    $display("Opcode is incorrect from register location %0d: ", read_pointer);
-    has_error = 1'b1;
-  if( iw_test_reg[read_pointer].op_a == instruction_word.op_a)
-    $display("Operant_a is correct from register location %0d: ", read_pointer);
-  else
-    number_of_errors_per_test++;
-    $display("Operant_a is incorrect from register location %0d: ", read_pointer);
-    has_error = 1'b1;
-  if( iw_test_reg[read_pointer].op_b == instruction_word.op_b)
-      $display("Operant_b is correct from register location %0d: ", read_pointer);
-    else
-      number_of_errors_per_test++;
-      $display("Operant_b is incorrect from register location %0d: ", read_pointer);
-       has_error = 1'b1;
-    if(has_error)begin
-      $display("Transaction {%s, %0d, %0d, %0d} failed\n\n", instruction_word.opc.name, instruction_word.op_a, instruction_word.op_b, instruction_word.rezultat);
-      failed_tests++;
-      has_error = 1'b0;
+  function void check_results; // din instruction word luam operand A, operand B, op code si calculam iar valorile si le verificam fata de cele din DUT (case)
+    automatic longint expected_result = 0; // rezultat intern folosit la calcul, longint e pe 64 de biti, deci pot face comparatie
+    if(instruction_word.opc.name == "ZERO")
+      expected_result = 0;
+    else if(instruction_word.opc.name == "PASSA")
+      expected_result = instruction_word.op_a;
+    else if(instruction_word.opc.name == "PASSB")
+      expected_result = instruction_word.op_b;
+    else if(instruction_word.opc.name == "ADD")
+      expected_result = instruction_word.op_a + instruction_word.op_b;
+    else if(instruction_word.opc.name == "SUB")
+      expected_result = instruction_word.op_a - instruction_word.op_b;
+    else if(instruction_word.opc.name == "MULT")
+      expected_result = instruction_word.op_a * instruction_word.op_b;
+    else if(instruction_word.opc.name == "DIV") begin
+      if(instruction_word.op_b == 0)
+        expected_result = 0;
+      else
+        expected_result = instruction_word.op_a / instruction_word.op_b;
     end
-  case (iw_test_reg[read_pointer].opc)
-    ZERO : exp_result = 0;
-    ADD: exp_result = iw_test_reg[read_pointer].op_a + iw_test_reg[read_pointer].op_b;
-    SUB: exp_result = iw_test_reg[read_pointer].op_a - iw_test_reg[read_pointer].op_b;
-    PASSA: exp_result = iw_test_reg[read_pointer].op_a;
-    PASSB: exp_result = iw_test_reg[read_pointer].op_b;
-    MULT: exp_result = iw_test_reg[read_pointer].op_a * iw_test_reg[read_pointer].op_b;
-    DIV:
-         if(!iw_test_reg[read_pointer].op_b)
-              exp_result = 0;
-         else
-              exp_result = iw_test_reg[read_pointer].op_a / iw_test_reg[read_pointer].op_b;
-    MOD: exp_result = iw_test_reg[read_pointer].op_a % iw_test_reg[read_pointer].op_b;
-    default: $display("Non existent operator");
+    else if(instruction_word.opc.name == "MOD") begin
+      if(instruction_word.op_b == 0)
+        expected_result = 0;
+      else
+        expected_result = instruction_word.op_a % instruction_word.op_b;
+    end
+    
+    $display("Read pointer = %0d: ", read_pointer);
+    $display("  opcode = %0d (%s)", instruction_word.opc, instruction_word.opc.name);
+    $display("  operand_a = %0d",   instruction_word.op_a);
+    $display("  operand_b = %0d", instruction_word.op_b);
+    $display("  result = %0d", instruction_word.rezultat);
+    $display("  expected result = %0d", expected_result);
+    
+    if(expected_result == instruction_word.rezultat)
+      $display("OK: Expected result and the actual result are identical!\n");
+    else
+      $display("ERROR: Expected result and the actual result differ!\n");
+  endfunction: check_results
 
-  endcase
+  function void final_report;
+    if(passed_tests + failed_tests != WRITE_NR && passed_tests + failed_tests < WRITE_NR)
+      $display("\nYou have tested only %0d out of %0d!", passed_tests + failed_tests, WRITE_NR);
+    else if(passed_tests + failed_tests > WRITE_NR)
+      $display("\nYou have %0d tests and only %0d values!", passed_tests + failed_tests, WRITE_NR);
+    else begin
+      $display("\nNumber of passed tests: %0d (%0d%%)", passed_tests, (passed_tests * 100) / WRITE_NR);
+      $display("Number of failed tests: %0d (%0d%%)", failed_tests, (failed_tests * 100) / WRITE_NR);
+    end
+  endfunction: final_report
 
-  //Compararea rezultatului așteptat cu rezultatul primit de la DUT
-  if (exp_result == instruction_word.rezultat) begin
-    $display("Result check: Approved");
-    passedTest++;
+  function void overall_report;
+  int file;
+  file = $fopen("../reports/regression_status.txt", "a");
+  if(failed_tests != 0) begin
+    $fwrite(file, "Case %s: failed\n", CASE_NAME);
   end else begin
-    $display("Result check: Unapproved");
-    failedTest++;
+    $fwrite(file, "Case %s: passed\n", CASE_NAME);
   end
-   endfunction:checkResult
-
-
-  function void saveTestData;
-
-  iw_test_reg[write_pointer] = '{opcode, operand_a,operand_b,0};
-    $display("Read from register location %0d: ", write_pointer);
-    $display("  opcode = %0d (%s)", iw_test_reg[write_pointer].opc, iw_test_reg[write_pointer].opc.name);
-    $display("  operand_a = %0d",   iw_test_reg[write_pointer].op_a);
-    $display("  operand_b = %0d", iw_test_reg[write_pointer].op_b);
-  endfunction:saveTestData
-
- function final_report;
-
-  $display("Failed tests %0d: ", failedTest);
-  $display("Passed tests %0d: ", passedTest);
-
- endfunction:final_report
+  $fclose(file);
+  endfunction: overall_report
 
 endmodule: instr_register_test

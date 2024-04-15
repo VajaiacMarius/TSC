@@ -1,0 +1,310 @@
+# 1
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 08:58:31 on Apr 15,2024
+# vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
+# -- Compiling package instr_register_pkg
+# -- Compiling module instr_register
+# -- Importing package instr_register_pkg
+# -- Compiling module instr_register_test
+# ** Note: ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(125): (vlog-13177) Promoting concatenation '{opcode,operand_a,operand_b,...}' to an assignment pattern:  Unsized literal found.
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 08:58:31 on Apr 15,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GCASE_NAME=CASE_7 -GWRITE_ORDER=1 -GWRITE_NR=33 -GSEED_VAL=6644 -GREAD_ORDER=1 -GREAD_NR=32 
+# Start time: 08:58:31 on Apr 15,2024
+# 
+# **********************
+# *  THIS IS A SELF-CHECKING TESTBENCH. YOU DON'T        *
+# *    NEED TO VISUALLY VERIFY THE OUTPUT VALUES         *
+# * TO MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION *
+# ********************
+# 
+# 
+# Reseting the instruction register...
+# 
+# Writing values to register stack...
+# 
+# Reading back the same register locations written...
+# Read pointer = 1: 
+#   opcode = 4 (SUB)
+#   operand_a = 15
+#   operand_b = 1
+#   result = 14
+#   expected result = 14
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 6: 
+#   opcode = 3 (ADD)
+#   operand_a = -14
+#   operand_b = 3
+#   result = -11
+#   expected result = -11
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 1: 
+#   opcode = 4 (SUB)
+#   operand_a = 15
+#   operand_b = 1
+#   result = 14
+#   expected result = 14
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 5: 
+#   opcode = 0 (ZERO)
+#   operand_a = -8
+#   operand_b = 6
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Register Location 22: DUT opcode 6 (DIV), saved opcode 0 (ZERO)
+# Read pointer = 22: 
+#   opcode = 6 (DIV)
+#   operand_a = -11
+#   operand_b = 8
+#   result = -1
+#   expected result = -1
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 1: 
+#   opcode = 4 (SUB)
+#   operand_a = 15
+#   operand_b = 1
+#   result = 14
+#   expected result = 14
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 3: 
+#   opcode = 6 (DIV)
+#   operand_a = -2
+#   operand_b = 2
+#   result = -1
+#   expected result = -1
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 14: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 6: 
+#   opcode = 3 (ADD)
+#   operand_a = -14
+#   operand_b = 3
+#   result = -11
+#   expected result = -11
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 8: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 24: 
+#   opcode = 5 (MULT)
+#   operand_a = 8
+#   operand_b = 5
+#   result = 40
+#   expected result = 40
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 24: 
+#   opcode = 5 (MULT)
+#   operand_a = 8
+#   operand_b = 5
+#   result = 40
+#   expected result = 40
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 6: 
+#   opcode = 3 (ADD)
+#   operand_a = -14
+#   operand_b = 3
+#   result = -11
+#   expected result = -11
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 18: 
+#   opcode = 3 (ADD)
+#   operand_a = 6
+#   operand_b = 3
+#   result = 9
+#   expected result = 9
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 6: 
+#   opcode = 3 (ADD)
+#   operand_a = -14
+#   operand_b = 3
+#   result = -11
+#   expected result = -11
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 13: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 26: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 29: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 1: 
+#   opcode = 4 (SUB)
+#   operand_a = 15
+#   operand_b = 1
+#   result = 14
+#   expected result = 14
+# OK: Expected result and the actual result are identical!
+# 
+# Register Location 22: DUT opcode 6 (DIV), saved opcode 0 (ZERO)
+# Read pointer = 22: 
+#   opcode = 6 (DIV)
+#   operand_a = -11
+#   operand_b = 8
+#   result = -1
+#   expected result = -1
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 10: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 0: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 11: 
+#   opcode = 3 (ADD)
+#   operand_a = -14
+#   operand_b = 2
+#   result = -12
+#   expected result = -12
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 30: 
+#   opcode = 0 (ZERO)
+#   operand_a = 5
+#   operand_b = 5
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 3: 
+#   opcode = 6 (DIV)
+#   operand_a = -2
+#   operand_b = 2
+#   result = -1
+#   expected result = -1
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 7: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 6: 
+#   opcode = 3 (ADD)
+#   operand_a = -14
+#   operand_b = 3
+#   result = -11
+#   expected result = -11
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 21: 
+#   opcode = 5 (MULT)
+#   operand_a = 6
+#   operand_b = 8
+#   result = 48
+#   expected result = 48
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 21: 
+#   opcode = 5 (MULT)
+#   operand_a = 6
+#   operand_b = 8
+#   result = 48
+#   expected result = 48
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 5: 
+#   opcode = 0 (ZERO)
+#   operand_a = -8
+#   operand_b = 6
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 10: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 6: 
+#   opcode = 3 (ADD)
+#   operand_a = -14
+#   operand_b = 3
+#   result = -11
+#   expected result = -11
+# OK: Expected result and the actual result are identical!
+# 
+# Read pointer = 10: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   result = 0
+#   expected result = 0
+# OK: Expected result and the actual result are identical!
+# 
+# 
+# Number of passed tests: 31 (93%)
+# Number of failed tests: 2 (6%)
+# 
+# *********************
+# *  THIS IS NOW A SELF-CHECKING TESTBENCH. YOU NO        *
+# *  LONGER NEED TO VISUALLY VERIFY THE OUTPUT VALUES     *
+# * TO MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  *
+# *********************
+# 
+# ** Note: $finish    : ../../TSC_Lab/lab01_testbench-interface/instr_register_test.sv(93)
+#    Time: 706 ns  Iteration: 1  Instance: /top/test
+# End time: 08:58:31 on Apr 15,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
