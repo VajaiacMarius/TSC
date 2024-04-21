@@ -5,9 +5,9 @@
 package instr_register_pkg;
   timeunit 1ns/1ns;
 
-  typedef enum logic [3:0] {   // o enumeratie de tip logic, pe 4 biti, 16 stari
-  	ZERO, //sa iasa doar zero
-    PASSA, //iese A
+  typedef enum logic [3:0] {   
+  	ZERO, 
+    PASSA, 
     PASSB,
     ADD,
     SUB,
@@ -15,18 +15,20 @@ package instr_register_pkg;
     DIV,
     MOD
   } opcode_t;
-
- typedef logic signed [31:0] operand_t;   //registru
-
-  typedef logic signed [63:0] result_t; // 64 de biti, pentru * si /, pot sa genereze rezultate peste 32 de biti. Trunchierea 
   
-  typedef logic [4:0] address_t;    //32 de adrese 
+  
+ typedef logic signed [31:0] operand_t;   
+
+  typedef logic signed [63:0] result_t; 
+  //bitul de 63 reprezinta semnul
+  // bitul se declara cu b si pui sa fie egal cu semn
+  typedef logic [4:0] address_t;     
   
   typedef struct {
     opcode_t  opc;
     operand_t op_a;
     operand_t op_b; 
-    result_t rezultat; // pentru * si /, se stocheaza valorile
+    result_t rezultat; 
   } instruction_t;
   
   

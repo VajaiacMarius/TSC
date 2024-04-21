@@ -1,21 +1,23 @@
-@REM call run_test.bat 30 20 0 0 c CASE_INC_INC
-@REM call run_test.bat 30 20 0 1 c CASE_INC_RAND
-@REM call run_test.bat 50 20 0 2 c CASE_INC_DEC
-@REM call run_test.bat 40 20 1 0 c CASE_RAND_INC
-@REM call run_test.bat 20 20 1 1 c CASE_RAND_RAND
-@REM call run_test.bat 10 10 1 2 c CASE_RAND_DEC
-@REM call run_test.bat 30 50 2 0 c CASE_DEC_INC
-@REM call run_test.bat 20 40 2 1 c CASE_DEC_RAND
-@REM call run_test.bat 10 10 2 2 c CASE_DEC_DEC
-call run_test.bat 50 32 1 1 c CASE_1 77777
-call run_test.bat 50 32 1 1 c CASE_2 52332
-call run_test.bat 50 50 1 1 c CASE_3 36344
-call run_test.bat 50 50 1 1 c CASE_4 22255
-call run_test.bat 40 40 1 1 c CASE_5 66652
-call run_test.bat 40 40 1 1 c CASE_6 9993
-call run_test.bat 33 32 1 1 c CASE_7 6644
-call run_test.bat 33 32 1 1 c CASE_8 1234
-call run_test.bat 50 42 1 1 c CASE_9 24325
-call run_test.bat 50 42 1 1 c CASE_10 7656
-call run_test.bat 44 32 1 1 c CASE_11 8566
-call run_test.bat 44 32 1 1 c CASE_12 16666
+set DATESTAMP=%DATE%  
+echo Test run on: %DATESTAMP% >>  ..\reports\regression_status.txt
+
+call run_test.bat 20 20 0 0 c INC_INC 1313273046
+call run_test.bat 20 20 0 1 c INC_RAND 3744353411
+call run_test.bat 20 20 0 2 c INC_DEC 3232190545
+call run_test.bat 20 20 1 0 c RAND_INC 240715693
+call run_test.bat 20 20 1 1 c RAND_RAND 2570432404
+call run_test.bat 20 20 1 2 c RAND_DEC 1299655233
+call run_test.bat 20 20 2 0 c DEC_INC 3644229486
+call run_test.bat 20 20 2 1 c DEC_RAND 225399898
+call run_test.bat 20 20 2 2 c DEC_DEC 3744353411
+
+call run_test.bat 50 50 1 1 c CASE_RAND1 1313273046
+call run_test.bat 50 50 1 1 c CASE_RAND2 3744353411
+call run_test.bat 50 50 1 1 c CASE_RAND3 3232190545
+call run_test.bat 50 50 1 1 c CASE_RAND4 240715693
+call run_test.bat 50 50 1 1 c CASE_RAND5 2570432404
+call run_test.bat 50 50 1 1 c CASE_RAND6 1299655233
+call run_test.bat 50 50 1 1 c CASE_RAND7 3644229486
+call run_test.bat 50 50 1 1 c CASE_RAND8 225399898
+call run_test.bat 50 50 1 1 c CASE_RAND9 3746322411
+call run_test.bat 50 50 1 1 c CASE_RAND10 1353233046
